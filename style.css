@@ -4,7 +4,7 @@
     --color-tertiary: #32f53c;
     --color-button: #dd8a50;
     --color-button-hover: #b9273f;
-    --color-text6: #de30be;
+    --color-text6: #3041de;
     --color-white: #effb13;
     --color-body: #98d5d8;
     --color-text2:#2023e3;
@@ -132,8 +132,8 @@ button {
 ul {
     list-style-type: none;
     color: var(--color-text6);
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
+    font-family: "Inter", comic-sans-serif;
+    font-size: 22px;
     margin: 20px 0;
 }
 
