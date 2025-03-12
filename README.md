@@ -1,6 +1,6 @@
 <h1> proyecto amigo secreto </h1>
 
-Estado del proyecto: En construcción.
+Estado del proyecto: Terminado.
 
 El codigo divide la pantalla en 3 campos. 
 En el campo superior el titulo y una imagen representativa.
