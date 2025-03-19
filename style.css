@@ -1,28 +1,38 @@
+
+/* Evitar desbordamientos y márgenes no deseados */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Bloquea el desplazamiento horizontal */
+}
 /* Estilos generales */
 body {
     margin: 0;
     font-family: Arial, sans-serif; /* Fuente por defecto */
     background-color: #f0f0f0; /* Fondo de la página */
     display: flex; /* Utilizamos Flexbox para centrar el contenido */
-    flex-direction: column; /* Alineamos elementos en columna */;
-
+    flex-direction: column; /* Alineamos elementos en columna */
+    align-items: center;
 }
 
 .encabezado {
-    margin-top: -90px;
-    background-color: #318812; /* Fondo del encabezado */
-    color: #effb13; /* Texto en blanco */
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    display: flex; /* Utilizamos Flexbox para centrar el contenido */
-    flex-direction: column; /* Alineamos elementos en columna */
-    justify-content: center; /* Centrado horizontal del contenido */
+    width: 100vw; /* Mantiene el ancho completo */
+    background-color: #318812;
+    color: #effb13;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 10px; /* Espaciado interno */
-    font-size: 50px;
-    width: 100%;
-    height: 40%;
-    gap: -80px;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
 }
+.main-title {
+    font-size: 120px;
+    margin: 0;
+}
+
 .foto {
     display: flex;
     justify-content: center;
@@ -32,12 +42,13 @@ body {
     height: auto;
     border-radius: 10%;
 }
+
 /* Contenedor principal */
 .contenedor {
     display: flex; /* Utilizamos Flexbox para dividir el espacio */
     height: calc(100vh - 100px); /* Altura total menos el encabezado */
     background-color: #f0f0f0; /* Fondo del contenedor */
-    width: 100vw;
+    width: 100%;
 }
 
 /* Sección general */
@@ -55,7 +66,7 @@ body {
     font-size: 40px; /* Tamaño de la fuente */
     background-color: #98d5d8; /* Color específico para la izquierda */    
     border: 2px solid #000000; /* Borde de 20px con color específico */
-    width: 100%;
+    width: 50%;
     height: 100%;
 }
 
@@ -64,9 +75,10 @@ body {
     background-color: #f7d0d0; /* Color específico para la derecha */
     font-size: 40px; 
     border: 2px solid #000000;
-    width: 100%;
+    width: 50%;
     height: 100%;
 }
+
 /* Contenedor para el campo de texto y el botón */
 .input-wrapper {
     margin-top: 30px; /* Ajustamos el margen superior para centrar el contenido */
@@ -74,6 +86,7 @@ body {
     align-items: center; /* Alinea el campo de texto y el botón verticalmente al centro */
     gap: 2px; /* Añadimos un pequeño espacio entre el campo de texto y el botón */
 }
+
 .button-draw {
     margin-top: 30px; /* Ajustamos el margen superior para centrar el contenido */
     height: 50px; /* Altura del botón */
@@ -82,11 +95,12 @@ body {
     border-radius: 25px 25px 25px 25px;
     width: 400px;
     padding: 10px 40px;
-    color:#000 ;
+    color: #000;
     background-color: greenyellow;
     font-size: 18px;
     font-weight: 700;
 }
+
 .input-name {
     width: 400px;
     padding: 10px;
@@ -97,6 +111,7 @@ body {
     height: 50px;
     box-sizing: border-box;
 }
+
 .button-add {
     width: 100px;
     align-items: center;
@@ -109,6 +124,7 @@ body {
     cursor: pointer;
     display: flex;
 }
+
 .section-title1 {
     padding-top: 30px;
     margin-top: 50px;
@@ -118,6 +134,7 @@ body {
     margin: 10px 0;
     text-align: center;
 }
+
 .section-title2 {
     padding-top: 30px;
     margin-top: 50px;
@@ -127,17 +144,86 @@ body {
     margin: 10px 0;
     text-align: center;
 }
+
 .icono {
     width: 40px;
     height: 40px;
     margin-right: 20px;
 }
+.resaltado1 {
+    font-size: 40px;
+    color: rgb(179, 19, 157);
+    font-weight: bold;
+}
+
 .resaltado {
     color: rgb(179, 19, 157);
     font-weight: bold;
 }
+
 .name-list {
-    text-align: left;
-    margin-left: 400px;
-    width: 100%;
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    max-width: 400px; /* Limita el ancho máximo */
+    margin: 20px auto; /* Centra el contenedor de la lista en la página */
+    text-align: center; /* Centra el texto dentro de la lista */
+}
+
+.name-list ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding: 0;
+}
+
+.name-list li {
+    font-size: 26px; /* Tamaño de la fuente de los elementos de la lista */
+    margin: 10px 0; /* Espacio entre los elementos */
+    color: #333; /* Color del texto */
+}
+
+@media (max-width: 1000px) {
+    /* Encabezado */
+    .encabezado {
+        width: 100%; /* Asegura que el encabezado ocupe todo el ancho */
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .foto {
+        width: 100%; /* Asegura que la imagen ocupe todo el ancho */
+        height: auto; /* Mantiene la proporción de la imagen */
+        object-fit: cover; /* La imagen cubre el área disponible sin distorsión */
+        margin-top: 10px; /* Espacio para separar la imagen del título */
+    }
+
+    .encabezado h1 {
+        font-size: 3rem; /* Tamaño más controlado para el título */
+        margin: 10px 0; /* Un poco de margen alrededor del título */
+    }
+
+    .contenedor {
+        flex-direction: column; /* Los contenedores se alinean en columna */
+        align-items: center;
+        width: 100%;
+    }
+
+    .izquierda, .derecha {
+        width: 100%; /* Asegura que las secciones izquierda y derecha se alineen */
+    }
+
+    /* Ajuste de inputs y botones */
+    .input-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        max-width: 400px;
+        margin: auto;
+    }
+
+    .input-name, .button-add, .button-draw {
+        width: 100%;
+    }
 }

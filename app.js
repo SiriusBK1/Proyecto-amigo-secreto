@@ -1,54 +1,100 @@
 let listaAmigos = [];
 let amigosDisponibles = [];
 
+function condicionesIniciales() {
+    // Limpiar las listas de amigos
+    listaAmigos = [];
+    amigosDisponibles = [];
+
+    // Limpiar la lista de amigos mostrada en el HTML
+    mostrarAmigos();
+
+    // Limpiar el mensaje del amigo elegido
+    document.getElementById("elegido").innerHTML = "";
+
+    // Limpiar el campo de entrada de nombre
+    document.getElementById("amigo").value = "";
+
+    // Deshabilitar el botón "Sorteo" al inicio o después de reiniciar
+    document.getElementById("sorteo").disabled = true; 
+
+    // Opcional: Puedes reiniciar el focus en el campo de texto para facilitar la entrada
+    document.getElementById("amigo").focus();
+}
+
+// Función para agregar un nuevo amigo
 function agregarAmigo() {
-    let nuevoAmigo = document.getElementById("amigo"); //ingresa nombre en la casilla blanca
-    let amigo = nuevoAmigo.value;
+    let nuevoAmigo = document.getElementById("amigo");
+    let amigo = nuevoAmigo.value.trim();
 
-    if(amigo.length > 0 && !listaAmigos.includes(amigo)){  //si el nombre ingresado es mayor a 0
-        nuevoAmigo.value = ''; 
-    listaAmigos.push(amigo); // se agrega el nombre a la lista de amigos
-    amigosDisponibles=[...listaAmigos]; //se copia la lista de amigos
-    console.log(listaAmigos); // se muestra en consola
-        }else{
-        alert("Ingrese un nombre válido o que no esté repetido"); // si no se ingresa un nombre se muestra un alert
+    if (amigo.length === 0) {
+        alert("El campo de nombre está vacío. Por favor, ingrese un nombre.");
+    } else if (amigo.length > 20) {
+        alert("El nombre no debe tener más de 20 caracteres.");
+    } else if (!listaAmigos.includes(amigo)) {
+        nuevoAmigo.value = ''; // Limpiar el campo después de añadir el nombre
+        listaAmigos.push(amigo);
+        amigosDisponibles = [...listaAmigos];
+        console.log(listaAmigos);
+
+        mostrarAmigos();
+        verificarBotonSorteo();
+    } else {
+        alert("Este nombre ya ha sido añadido.");
     }
-    mostrarAmigos(); //muestra los amigos en la lista
 }
 
-function mostrarAmigos() { //funcion para mostrar los amigos en la lista
-    let amigos = document.getElementById("listaAmigos"); //selecciona el id listaAmigos en el html
-    amigos.innerHTML = ""; 
+// Función para mostrar la lista de amigos en la interfaz
+function mostrarAmigos() {
+    let amigos = document.getElementById("listaAmigos");
+    amigos.innerHTML = "";
     listaAmigos.forEach((amigo) => {
-        amigos.innerHTML += `<li>${amigo}</li>`; //muestra los amigos en una lista visible en la pagina
+        amigos.innerHTML += `<li><span class="resaltado1">${amigo}</li>`;
     });
-};
+}
 
+// Función para verificar si el botón "Sorteo" debe estar habilitado o no
+function verificarBotonSorteo() {
+    let botonSorteo = document.getElementById('sorteo');
+    if (listaAmigos.length > 0) {
+        botonSorteo.disabled = false;
+    } else {
+        botonSorteo.disabled = true;
+    }
+}
+
+// Función para elegir un amigo al azar
 function elegirAmigo() {
-  if(amigosDisponibles.length === 0){ //si la lista de amigos esta vacia
-    alert("Todos los amigos han sido sorteados. Se reiniciará el sorteo.");
-        amigosDisponibles = [...listaAmigos]; // Restablecer lista de sorteos
-        limpiarLista(); //limpia la lista de amigos
-        return null; //retorna null
-    }else{
-    let indiceAleatorio = Math.floor(Math.random() * amigosDisponibles.length); //elige un amigo al azar
-    let amigoElegido = amigosDisponibles.splice(indiceAleatorio, 1)[0]; //elimina el amigo elegido de la lista de amigos
-    console.log(listaAmigos[amigoElegido]) //muestra en consola el amigo elegido
-    return amigoElegido //retorna el amigo elegi   do
+    if (amigosDisponibles.length === 0) {
+        alert("Todos los amigos han sido sorteados. Se reiniciará el sorteo.");
+        amigosDisponibles = [...listaAmigos];
+        limpiarLista();
+        return null;
+    } else {
+        let indiceAleatorio = Math.floor(Math.random() * amigosDisponibles.length);
+        let amigoElegido = amigosDisponibles.splice(indiceAleatorio, 1)[0];
+        console.log(amigoElegido);
+        return amigoElegido;
     }
 }
+
+// Función para mostrar el amigo elegido
 function mostrarAmigoElegido() {
-    let amigoElegidoElemento = document.getElementById("elegido"); //selecciona el id amigoElegido en el html
-    let amigo=elegirAmigo(); //se guarda el amigo elegido en una variable
-    if(amigo) {
-    amigoElegidoElemento.innerHTML = `<p> El amigo elegido es <em><strong><span class="resaltado">${amigo}</em></strong></p>`; //muestra el amigo elegido en la pagina
+    let amigoElegidoElemento = document.getElementById("elegido");
+    let amigo = elegirAmigo();
+    if (amigo) {
+        amigoElegidoElemento.innerHTML = `<p> El amigo elegido es <em><strong><span class="resaltado">${amigo}</em></strong></p>`;
     }
 }
-function limpiarLista(){
+
+// Función para limpiar la lista de amigos
+function limpiarLista() {
     listaAmigos = [];
     amigosDisponibles = [];
     mostrarAmigos();
     document.getElementById("elegido").innerHTML = "";
+    verificarBotonSorteo();
 }
-//mostrarAmigoElegido();//
-//function limpiarBox//
+
+// Llamada inicial para establecer el estado de la página
+condicionesIniciales();
